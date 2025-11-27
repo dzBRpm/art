@@ -58,7 +58,7 @@
             transform: scale(1.05);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        /* Стили для динамических модальных окон */
+        
         .modal { 
             display: none;
             position: absolute;
@@ -173,8 +173,7 @@
         .value-orange { color: #ff9900; }
         .negative-effect { color: #ff4747; }
 		.positive-effect { color: #FFFF00; }
-		
-        /* --- Flexbox для основной структуры --- */
+
         .main-container {
             display: flex;	
             gap: 30px;
@@ -185,7 +184,6 @@
             min-width: 0; 
         }
         
-        /* --- Стили для панели навигации --- */
         .site-info-panel {
             width: 600px;	
             padding: 15px;
@@ -193,10 +191,8 @@
             border: 1px solid #444;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-            /* Убрано position: sticky, чтобы панель скроллилась */
             min-height: 400px;
-            flex-shrink: 0; /* Панель не сжимается */
-            /* На больших экранах она всегда видна и занимает 320px */
+            flex-shrink: 0; 
             flex-basis: 600px; 
         }
         
@@ -212,8 +208,7 @@
             line-height: 1.5;
             margin-bottom: 15px;
         }
-        
-        /* Медиа-запрос для адаптивности: панель переходит вниз на маленьких экранах */
+
         @media (max-width: 1000px) {
             .main-container {
                 flex-direction: column;	
@@ -221,7 +216,7 @@
             .site-info-panel {
                 width: auto;
                 position: static;
-                order: -1; /* Панель ставится перед списком артефактов на мобильных */
+                order: -1;
                 flex-basis: auto; 
                 flex-grow: 1; 
                 min-height: auto; 
@@ -815,7 +810,7 @@
     ]
 },
 {
-    id: 'modal53', label: 'Бутон', img: 'buton.jpg',
+    id: 'modal53', label: 'Амёба', img: 'ameba.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -826,7 +821,7 @@
     ]
 },
 {
-    id: 'modal54', label: 'Гипер-куб', img: 'giper_kub.jpg',
+    id: 'modal54', label: 'Бутон', img: 'buton.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -837,7 +832,7 @@
     ]
 },
 {
-    id: 'modal55', label: 'Гребень', img: 'greben.jpg',
+    id: 'modal55', label: 'Гипер-куб', img: 'giper_kub.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -848,7 +843,7 @@
     ]
 },
 {
-    id: 'modal56', label: 'Грозовая ягода', img: 'grozovaya_yagoda.jpg',
+    id: 'modal56', label: 'Гребень', img: 'greben.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -859,7 +854,7 @@
     ]
 },
 {
-    id: 'modal57', label: 'Железная колючка', img: 'zeleznaya_koluchka.jpg',
+    id: 'modal57', label: 'Грозовая ягода', img: 'grozovaya_yagoda.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -870,7 +865,18 @@
     ]
 },
 {
-    id: 'modal58', label: 'Кубик-Рубик', img: 'kubik_rubik.jpg',
+    id: 'modal58', label: 'Железная колючка', img: 'zeleznaya_koluchka.jpg',
+    desc: 'В данный момент нет информации об этом артефакте',
+    props: [
+        { name: '???', values: ['??', '??', '??', '??', '??'] },
+        { name: '???', values: ['??', '??', '??', '??', '??'] },
+        { name: '???', values: ['??', '??', '??', '??', '??'] },
+        { name: '???', values: ['??', '??', '??', '??', '??'] },
+        { name: '???', values: ['??', '??', '??', '??', '??'] }
+    ]
+},
+{
+    id: 'modal59', label: 'Кубик-Рубик', img: 'kubik_rubik.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: 'Пулезащита', values: ['до 2 ед.', '??', '??', '??', '??'] },
@@ -879,7 +885,7 @@
     ]
 },
 {
-    id: 'modal59', label: 'Лепесток', img: 'lepestok.jpg',
+    id: 'modal60', label: 'Лепесток', img: 'lepestok.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -890,7 +896,7 @@
     ]
 },
 {
-    id: 'modal60', label: 'Магический шар', img: 'magicheskiy_shar.jpg',
+    id: 'modal61', label: 'Магический шар', img: 'magicheskiy_shar.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -901,7 +907,7 @@
     ]
 },
 {
-    id: 'modal61', label: 'Морская звезда', img: 'morskaya_zvezda.jpg',
+    id: 'modal62', label: 'Морская звезда', img: 'morskaya_zvezda.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -912,7 +918,7 @@
     ]
 },
 {
-    id: 'modal62', label: 'Мясная зажигалка', img: 'myasnaya_zazigalka.jpg',
+    id: 'modal63', label: 'Мясная зажигалка', img: 'myasnaya_zazigalka.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -923,7 +929,7 @@
     ]
 },
 {
-    id: 'modal63', label: 'Пленка', img: 'plenka.jpg',
+    id: 'modal64', label: 'Пленка', img: 'plenka.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -934,7 +940,7 @@
     ]
 },
 {
-    id: 'modal64', label: 'Попрыгунчик', img: 'poprigunchik.jpg',
+    id: 'modal65', label: 'Попрыгунчик', img: 'poprigunchik.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -945,7 +951,7 @@
     ]
 },
 {
-    id: 'modal65', label: 'Факел', img: 'fakel.jpg',
+    id: 'modal66', label: 'Факел', img: 'fakel.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -956,7 +962,7 @@
     ]
 },
 {
-    id: 'modal66', label: 'Ядро', img: 'yadro.jpg',
+    id: 'modal67', label: 'Ядро', img: 'yadro.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: '???', values: ['??', '??', '??', '??', '??'] },
@@ -967,7 +973,7 @@
     ]
 },
 {
-    id: 'modal67', label: 'Пустышка', img: 'pustishka.jpg',
+    id: 'modal68', label: 'Пустышка', img: 'pustishka.jpg',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
         { name: 'Шок', values: ['11 ед.', '22 ед.', '26.4 ед.', '35.2 ед.', '44 ед.'] },
@@ -976,10 +982,7 @@
     ]
 },
 
-        {
-            id: 'modal68', label: 'Пусто', img: 'nope.jpg',
-            
-        },
+        
         {
             id: 'modal69', label: 'Пусто', img: 'nope.jpg',
             
@@ -992,9 +995,8 @@
 
     const ICON_PER_ROW = 10;
     const VALUE_CLASSES = ['value-gray', 'value-white', 'value-green', 'value-blue', 'value-orange'];
-    let zIndexCounter = 10; // Счетчик для z-index
+    let zIndexCounter = 10; 
 
-    // 1. ГЕНЕРАЦИЯ СПИСКА ИКОНОК
     function generateIconList() {
         const container = document.getElementById('icon-list-container');
         let currentRow = document.createElement('div');
@@ -1021,7 +1023,6 @@
         }
     }
 
-    // 2. ДИНАМИЧЕСКАЯ ГЕНЕРАЦИЯ КОНТЕНТА МОДАЛЬНОГО ОКНА
     function getModalContentHTML(artifactData, uniqueModalId) {
         const propertiesHtml = artifactData.props.map(prop => {
             const valuesHtml = prop.values.map((val, i) =>
@@ -1053,22 +1054,18 @@
         `;
     }
 
-    // 3. ЗАКРЫТИЕ ВСЕХ НЕЗАКРЕПЛЕННЫХ МОДАЛЬНЫХ ОКОН
     function closeAllModals() {
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
-            // Удаляем из DOM, только если у них НЕТ класса 'pinned'
             if (!modal.classList.contains('pinned')) {
                 modal.remove(); 
             }
         });
     }
 
-    // 4. ОТКРЫТИЕ И ПОЗИЦИОНИРОВАНИЕ МОДАЛЬНОГО ОКНА
     function openModal(id, event) {
         event.stopPropagation();
-        
-        // КЛЮЧЕВАЯ ЛОГИКА: Закрываем все незакрепленные окна перед открытием нового
+
         closeAllModals(); 
 
         const artifact = ARTIFACTS_DATA.find(a => a.id === id);
@@ -1076,104 +1073,80 @@
 
         const uniqueModalId = `modal-${id}-${Date.now()}`;
         
-        // 1. Создаем новый элемент модального окна
         const modalEl = document.createElement('div');
         modalEl.id = uniqueModalId;
         modalEl.className = 'modal';
         modalEl.setAttribute('data-artifact-id', id);
         modalEl.style.display = 'block';
         
-        // 2. Генерируем контент и вставляем
         modalEl.innerHTML = getModalContentHTML(artifact, uniqueModalId);
         document.body.appendChild(modalEl);
         
-        // 3. НОВАЯ ЛОГИКА ПОЗИЦИОНИРОВАНИЯ
-        const iconRect = event.currentTarget.getBoundingClientRect(); // Позиция иконки
+        const iconRect = event.currentTarget.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
         const modalWidth = 450;
-        const MODAL_HEIGHT_ESTIMATE = 400; // Примерная высота для расчета
-        const OFFSET = 15; // Отступ от иконки и краев
+        const MODAL_HEIGHT_ESTIMATE = 400;
+        const OFFSET = 15; 
 
         let top, left;
 
-        // A. Горизонтальное позиционирование (Центрирование по иконке)
         let centerIconX = iconRect.left + (iconRect.width / 2);
         left = centerIconX - (modalWidth / 2);
-
-        // Корректировка влево/вправо (чтобы не выходило за края)
         left = Math.min(Math.max(OFFSET, left), viewportWidth - modalWidth - OFFSET);
 
-
-        // B. Вертикальное позиционирование (Ниже или выше иконки)
-        
-        // Проверяем, достаточно ли места СНИЗУ от иконки
         const spaceBelow = viewportHeight - iconRect.bottom;
         
         if (spaceBelow >= MODAL_HEIGHT_ESTIMATE + OFFSET) {
-            // *** 1. Открываем НИЖЕ иконки (Приоритет) ***
             top = iconRect.bottom + window.scrollY + OFFSET;
         } else {
-            // *** 2. Открываем ВЫШЕ иконки ***
             
             const spaceAbove = iconRect.top;
             
             if (spaceAbove >= MODAL_HEIGHT_ESTIMATE + OFFSET) {
-                // Если места сверху достаточно
                 top = iconRect.top + window.scrollY - MODAL_HEIGHT_ESTIMATE - OFFSET;
             } else {
-                // Если места нет нигде (очень маленький экран), прижимаем к верхнему краю.
                 top = window.scrollY + OFFSET; 
             }
         }
         
         modalEl.style.left = left + 'px';
         modalEl.style.top = top + 'px';
-
-        // 4. Настраиваем z-index и перетаскивание
         zIndexCounter++;
         modalEl.style.zIndex = zIndexCounter;
         setupDrag(modalEl); 
     }
 
-    // 5. ЗАКРЫТИЕ КОНКРЕТНОГО МОДАЛЬНОГО ОКНА
     function closeModal(uniqueModalId) {
         const modalEl = document.getElementById(uniqueModalId);
         if (modalEl) {
-            modalEl.remove(); // Удаляем элемент из DOM
+            modalEl.remove();
         }
     }
 
-    // 6. ЗАКРЕПЛЕНИЕ МОДАЛЬНОГО ОКНА
     function togglePin(uniqueModalId) {
         const modal = document.getElementById(uniqueModalId);
         if (modal) {
             modal.classList.toggle('pinned');
-            // Перенастраиваем перетаскивание (теперь оно разрешено для всех окон)
             setupDrag(modal);
 
             if (modal.classList.contains('pinned')) {
-                // Поднимаем закрепленное окно на самый верх
                 zIndexCounter++;
                 modal.style.zIndex = zIndexCounter;
             }
         }
     }
 
-    // 7. ЛОГИКА ПЕРЕТАСКИВАНИЯ (МОЖНО ПЕРЕТАСКИВАТЬ ЗАКРЕПЛЕННЫЕ ОКНА)
     function setupDrag(modalEl) {
         let pos3 = 0, pos4 = 0;
         let isDragging = false;
         const modalContent = modalEl.querySelector('.modal-content');
-        
-        // Перетаскивание включено, класс 'pinned' не проверяется
+
         modalContent.style.cursor = 'grab';
-        
-        // Назначаем обработчики
+
         modalEl.onmousedown = dragMouseDown;
         modalEl.ontouchstart = dragTouchStart;
 
-        // Также останавливаем всплытие touch-событий на кнопках
         const closeButton = modalEl.querySelector('.close');
         const pinButton = modalEl.querySelector('.pin-button');
         if (closeButton) { closeButton.ontouchstart = (e) => e.stopPropagation(); }
@@ -1182,8 +1155,7 @@
         function dragMouseDown(e) {
             e = e || window.event;
             e.preventDefault();
-            
-            // Запрещаем перетаскивание, если клик был по кнопке или свойству
+
             if (e.target.closest('.close') || e.target.closest('.pin-button') || e.target.closest('.artifact-property')) return;
             
             pos3 = e.clientX;
@@ -1210,14 +1182,12 @@
             pos3 = e.clientX;
             pos4 = e.clientY;
             
-            // Установка позиции с учетом границ
             let newTop = modalEl.offsetTop - pos2;
             let newLeft = modalEl.offsetLeft - pos1;
 
-            // Проверка границ (не даем окну уйти за край)
-            newTop = Math.max(0, newTop); // Верхний край
-            newLeft = Math.max(0, newLeft); // Левый край
-            newLeft = Math.min(newLeft, window.innerWidth - modalEl.offsetWidth); // Правый край
+            newTop = Math.max(0, newTop); 
+            newLeft = Math.max(0, newLeft); 
+            newLeft = Math.min(newLeft, window.innerWidth - modalEl.offsetWidth);
 
             modalEl.style.top = newTop + "px";
             modalEl.style.left = newLeft + "px";
@@ -1228,7 +1198,6 @@
             document.onmousemove = null;
         }
 
-        // Touch logic
         function dragTouchStart(e) {
             if (e.target.closest('.close') || e.target.closest('.pin-button') || e.target.closest('.artifact-property')) return;
 
@@ -1262,14 +1231,14 @@
                 pos3 = touch.clientX;
                 pos4 = touch.clientY;
                 
-                // Установка позиции с учетом границ
+               
                 let newTop = modalEl.offsetTop - pos2;
                 let newLeft = modalEl.offsetLeft - pos1;
 
-                // Проверка границ (не даем окну уйти за край)
-                newTop = Math.max(0, newTop); // Верхний край
-                newLeft = Math.max(0, newLeft); // Левый край
-                newLeft = Math.min(newLeft, window.innerWidth - modalEl.offsetWidth); // Правый край
+                
+                newTop = Math.max(0, newTop); 
+                newLeft = Math.max(0, newLeft);
+                newLeft = Math.min(newLeft, window.innerWidth - modalEl.offsetWidth);
                 
                 modalEl.style.top = newTop + "px";
                 modalEl.style.left = newLeft + "px";
@@ -1288,5 +1257,4 @@
 </body>
 
 </html>
-
 
