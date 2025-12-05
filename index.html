@@ -275,7 +275,7 @@
     </div>
     
     <script>
-    // --- ЕДИНАЯ СТРУКТУРА ДАННЫХ ДЛЯ АРТЕФАКТОВ (СОКРАЩЕНО) ---
+ 
     const ARTIFACTS_DATA = [
         		{
 			id: 'modal1', label: 'Фонарь', img: 'fonar.jpg',
@@ -1000,6 +1000,24 @@
             
         },
     ];
+	function isPusto(artifact) {
+        return artifact.label === 'Пусто';
+    }
+
+   
+    ARTIFACTS_DATA.sort((a, b) => {
+        const aIsPusto = isPusto(a);
+        const bIsPusto = isPusto(b);
+
+        if (aIsPusto && !bIsPusto) {
+            return 1;
+        }
+        if (!aIsPusto && bIsPusto) {
+            return -1;
+        }
+        
+        return a.label.localeCompare(b.label, 'ru', { sensitivity: 'base' });
+    });
 
     const ICON_PER_ROW = 10;
     const VALUE_CLASSES = ['value-gray', 'value-white', 'value-green', 'value-blue', 'value-orange'];
@@ -1259,7 +1277,6 @@
         }
     }
 
-    // Запуск генерации списка иконок при загрузке
     document.addEventListener('DOMContentLoaded', generateIconList);
     </script>
 </body>
