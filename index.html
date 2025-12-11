@@ -1,3 +1,4 @@
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -12,22 +13,24 @@
             color: #e0e0e0;
             position: relative;
         }
+		#search-container {
+			margin-bottom: 20px;
+		}
 		#artifact-search {
-    width: calc(100% - 30px); /* Adjusting for padding */
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #444;
-    border-radius: 5px;
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    font-size: 16px;
-    transition: border-color 0.3s;
-}
-
-#artifact-search:focus {
-    border-color: #ff9900;
-    outline: none;
-}
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			border: 1px solid #444;
+			border-radius: 5px;
+			background-color: #222;
+			color: #e0e0e0;
+			font-size: 16px;
+			transition: border-color 0.2s;
+		}
+		#artifact-search:focus {
+			border-color: #ff9900;
+			outline: none;
+		}
         h1 {
             color: #fff;
             border-bottom: 2px solid #333;
@@ -203,7 +206,6 @@
         .value-orange { color: #ff9900; }
         .negative-effect { color: #ff4747; }
 		.positive-effect { color: #FFFF00; }
-
         .main-container {
             display: flex;	
             gap: 30px;
@@ -238,7 +240,6 @@
             line-height: 1.5;
             margin-bottom: 15px;
         }
-
         @media (max-width: 1000px) {
             .main-container {
                 flex-direction: column;	
@@ -258,6 +259,9 @@
     <div class="main-container">
         <div class="icon-list-wrapper">
             <h1>Артефакты</h1>
+	<div id="search-container">
+		<input type="text" id="artifact-search" placeholder="Поиск артефактов...">
+	</div>
             <p></p>
             <div id="icon-list-container"></div>
         </div>
@@ -313,7 +317,7 @@
  
     const ARTIFACTS_DATA = [
         		{
-			id: 'modal1', label: 'Фонарь', img: 'fonar.jpg',
+			id: 'modal1', label: 'Фонарь', img: 'images/fonar.jpg',
 			border: 'green',
 			desc: 'Артефакт встречается нечасто. Образуется в аномалиях электрического типа. Люди, полностью утратившие зрение, способны увидеть свет и очертания артефакта, если смотрят в его направлении.',
 			props: [
@@ -326,9 +330,9 @@
 			]
 },
 {
-    id: 'modal2', label: 'Медуза', img: 'meduza.jpg',
+    id: 'modal2', label: 'Медуза', img: 'images/meduza.jpg',
 	border: 'yellow',
-    desc: 'Распространённый артефакт гравитационного происхождения. Образуется в аномалии «трамплин». Формирует слабое защитное поле, побочным эффектом которого является лёгкое излучение. Артефакт широко распространён и недорог. Артефакт гравитационной природы, обладающий свойством поглощать радиоактивные частицы, тем самым уменьшая облучённость организма.',
+    desc: 'Распространенный артефакт гравитационного происхождения. Образуется в аномалии «трамплин». Формирует слабое защитное поле, побочным эффектом которого является легкое излучение. Артефакт широко распространен и недорог. Артефакт гравитационной природы, обладающий свойством поглощать радиоактивные частицы, тем самым уменьшая облученность организма.',
     props: [
         { name: 'Кровь', values: ['-16.25 ед.', '-33 ед.', '-39.6 ед.', '-52 ед.', '-66 ед.'] , neg: true },
         { name: 'Пулезащита', values: ['??', 'до 1 ед.', 'до 1 ед.', '1 ед.', 'до 2 ед.'] },
@@ -338,7 +342,7 @@
     ]
 },
 {
-    id: 'modal3', label: 'Батарейка', img: 'batareyka.jpg',
+    id: 'modal3', label: 'Батарейка', img: 'images/batareyka.jpg',
 	border: 'green',
     desc: 'Известно, что в состав этого артефакта входят электростатические элементы, однако в каких именно условиях он формируется, науке пока не известно. Ценится среди жителей и гостей Зоны за способность оказывать на организм человека тонизирующее воздействие. При слишком длительном воздействии истощает организм.',
     props: [
@@ -349,9 +353,9 @@
     ]
 },
 {
-    id: 'modal4', label: 'Бенгальский огонек', img: 'bengal.jpg',
+    id: 'modal4', label: 'Бенгальский огонек', img: 'images/bengal.jpg',
 	border: 'green',
-    desc: 'Представитель семейства электростатических артефактов, получивший название за свою яркость. Обладает способностью сглаживать перепады напряжённости электрического поля.',
+    desc: 'Представитель семейства электростатических артефактов, получивший название за свою яркость. Обладает способностью сглаживать перепады напряженности электрического поля.',
     props: [
         { name: 'Переносимый вес', values: ['2.5 кг.', '5 кг.', '6 кг.', '8 кг.', '10 кг.'] },
         { name: 'Электрозащита', values: ['2.5%', '5%', '6%', '8%', '10%'] },
@@ -359,19 +363,21 @@
     ]
 },
 {
-    id: 'modal5', label: 'Бифштекс', img: 'bifshteks.jpg',
-	border: 'red',
-    desc: 'В данный момент нет информации об этом артефакте',
+    id: 'modal5', label: 'Бифштекс', img: 'images/bifshteks.jpg',
+	border: 'yellow',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях термического типа. Если долго держать Бифштекс в незащищенной руке, отдирать его придется с честичками кожи.',
     props: [
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] , neg: true }
+        { name: 'Кровь', values: ['??', '16 ед.', '??', '??', '??'] },
+		{ name: 'Термозащита', values: ['??', '-5%', '??', '??', '??'], neg: true },
+		{ name: 'Химзащита', values: ['??', '5?', '??', '??', '??'] },
+        { name: 'Радиация', values: ['??', '60 ед.', '??', '??', '??'], neg: true },
+        { name: 'Жажда', values: ['??', '-33 ед.', '??', '??', '??'], neg: true }
     ]
 },
 {
-    id: 'modal6', label: 'Брак', img: 'brak.jpg',
+    id: 'modal6', label: 'Брак', img: 'images/brak.jpg',
 	border: 'green',
-    desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях термического типа. На вид раскалён, но на ощупь еле теплый. Феномен обоснован низкой теплопроводностью.',
+    desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях термического типа. На вид раскален, но на ощупь еле теплый. Феномен обоснован низкой теплопроводностью.',
     props: [
         { name: 'Кровь', values: ['8 ед.', '16 ед.', '19.2 ед.', '25.6 ед.', '32 ед.'] },
         { name: 'Переносимый вес', values: ['5 кг.', '10 кг.', '12 кг.', '16 кг.', '20 кг.'] },
@@ -380,7 +386,7 @@
     ]
 },
 {
-    id: 'modal7', label: 'Василиск', img: 'vasilisk.jpg',
+    id: 'modal7', label: 'Василиск', img: 'images/vasilisk.jpg',
 	border: 'green',
     desc: 'Артефакт, защищающий от физических воздейсвий, довольно редкий и таинственный.',
     props: [
@@ -390,7 +396,7 @@
     ]
 },
 {
-    id: 'modal8', label: 'Вертушка', img: 'vertushka.jpg',
+    id: 'modal8', label: 'Вертушка', img: 'images/vertushka.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -402,7 +408,7 @@
     ]
 },
 {
-    id: 'modal9', label: 'Вспышка', img: 'vspishka.jpg',
+    id: 'modal9', label: 'Вспышка', img: 'images/vspishka.jpg',
 	border: 'green',
     desc: 'Артефакт электростатической природы. Демонстрирует удивительную способность к поглощению электрических зарядов и последующему их рассеиванию. Способен защитить организм человека от воздействия электротоков большой силы и высокого напряжения.',
     props: [
@@ -413,19 +419,19 @@
     ]
 },
 {
-    id: 'modal10', label: 'Выверт', img: 'vivert.jpg',
+    id: 'modal10', label: 'Выверт', img: 'images/vivert.jpg',
 	border: 'yellow',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях гравитационного типа. В условиях экстримального холода Выверт ощущается теплым на ощупь, а при высокой температуре прохладным.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях гравитационного типа. В условиях экстримального холода Выверт ощущается теплым на ощупь, а при высокой температуре прохладным.',
     props: [
-        { name: 'Разрывозащита', values: ['до 1 ед.', '??', '??', 'до 2 ед.', '??'] },
+        { name: 'Разрывозащита', values: ['до 1 ед.', '??', 'до 2 ед.', 'до 2 ед.', '??'] },
         { name: 'Гравизащита', values: ['-2.5%', '-5%', '-6%', '-8%', '-10%'] , neg: true },
         { name: 'Радиация', values: ['25 ед.', '50 ед.', '60 ед.', '80 ед.', '100 ед.'] , neg: true }
     ]
 },
 {
-    id: 'modal11', label: 'Галька', img: 'galka.jpg',
+    id: 'modal11', label: 'Галька', img: 'images/galka.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях гравитационного типа. Несмотря на масивный внешний вид, артефакт пористый на ощупь и крошится при давлении.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях гравитационного типа. Несмотря на масивный внешний вид, артефакт пористый на ощупь и крошится при давлении.',
     props: [
         { name: 'Разрывозащита', values: ['нет', 'до 1 ед.', 'до 1 ед.', 'до 1 ед.', 'до 2 ед.'] },
         { name: 'Ударозащита', values: ['нет', 'до 1 ед.', 'до 1 ед.', 'до 1 ед.', 'до 2 ед.'] },
@@ -435,7 +441,7 @@
     ]
 },
 {
-    id: 'modal12', label: 'Глаз', img: 'glaz.jpg',
+    id: 'modal12', label: 'Глаз', img: 'images/glaz.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -447,9 +453,9 @@
     ]
 },
 {
-    id: 'modal13', label: 'Грави', img: 'gravi.jpg',
+    id: 'modal13', label: 'Грави', img: 'images/gravi.jpg',
 	border: 'yellow',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях гравитационного типа. Единственный способ разделить Грави на части — плазменная резка. Этот артефакт плотнее и тверже алмаза.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях гравитационного типа. Единственный способ разделить Грави на части — плазменная резка. Этот артефакт плотнее и тверже алмаза.',
     props: [
         { name: 'Переносимый вес', values: ['2.5 кг.', '5 кг.', '6 кг.', '8 кг.', '10 кг.'] },
         { name: 'Взрывозащита', values: ['1 ед.', '2 ед.', '??', 'до 3 ед.', '??'] },
@@ -457,7 +463,7 @@
     ]
 },
 {
-    id: 'modal14', label: 'Дымок', img: 'dimok.jpg',
+    id: 'modal14', label: 'Дымок', img: 'images/dimok.jpg',
 	border: 'green',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -470,7 +476,7 @@
     ]
 },
 {
-    id: 'modal15', label: 'Завтрак туриста', img: 'zavtrak_turista.jpg',
+    id: 'modal15', label: 'Завтрак туриста', img: 'images/zavtrak_turista.jpg',
 	border: 'yellow',
     desc: 'Артефакт образуется в аномалиях химического типа. Обладает резким запохом гнили. Без противогаза изучать не рекомендуется!',
     props: [
@@ -481,7 +487,7 @@
     ]
 },
 {
-    id: 'modal16', label: 'Золотая рыбка', img: 'zolotaya_ribka.jpg',
+    id: 'modal16', label: 'Золотая рыбка', img: 'images/zolotaya_ribka.jpg',
 	border: 'green',
     desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях гравитационного типа. Золотая рыбка тонет в воде с любым содержанием соли, зато держится на плаву в дистиллированной воде.',
     props: [
@@ -491,9 +497,9 @@
     ]
 },
 {
-    id: 'modal17', label: 'Каменное сердце', img: 'kamenoe_serdce.jpg',
+    id: 'modal17', label: 'Каменное сердце', img: 'images/kamenoe_serdce.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях гравитационного типа. Согласно сталкерским мифам, если вырезать сердце контролеру, оно будет выглядеть так же.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях гравитационного типа. Согласно сталкерским мифам, если вырезать сердце контролеру, оно будет выглядеть так же.',
     props: [
         { name: 'Здоровье', values: ['0.25 ед.', '0.5 ед.', '0.6 ед.', '0.8 ед.', '1 ед.'] },
         { name: 'Переносимый вес', values: ['2.5 кг.', '5 кг.', '6 кг.', '8 кг.', '10 кг.'] },
@@ -502,9 +508,9 @@
     ]
 },
 {
-    id: 'modal18', label: 'Капля', img: 'kaplya.jpg',
+    id: 'modal18', label: 'Капля', img: 'images/kaplya.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях термического типа. При абсолютном нуле температуры Капли обрастают непрозрачной черной пленкой. При потеплении она растворяется.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях термического типа. При абсолютном нуле температуры Капли обрастают непрозрачной черной пленкой. При потеплении она растворяется.',
     props: [
         { name: 'Кровь', values: ['8.25 ед.', '16.5 ед.', '19.8 ед.', '26.4 ед.', '33 ед.'] },
         { name: 'Термозащита', values: ['5%', '10%', '12%', '16%', '20%'] },
@@ -512,9 +518,9 @@
     ]
 },
 {
-    id: 'modal19', label: 'Кишка', img: 'kishka.jpg',
+    id: 'modal19', label: 'Кишка', img: 'images/kishka.jpg',
 	border: 'green',
-    desc: 'Чем бы эта штука ни была, она, вероятно, самая мерзкая, отвратительная и тошнотворная во всей Вселенной. Из-за своего происхождения — а точнее, из-за артефактов, которые, по слухам, являются искажёнными внутренностями расчленённых сталкеров, — люди склонны считать её проклятой. Хотя это далеко от истины, поскольку она влияет на организм, увеличивая количество метаболитов у носителя.',
+    desc: 'Чем бы эта штука ни была, она, вероятно, самая мерзкая, отвратительная и тошнотворная во всей Вселенной. Из-за своего происхождения — а точнее, из-за артефактов, которые, по слухам, являются искаженными внутренностями расчлененных сталкеров, — люди склонны считать ее проклятой. Хотя это далеко от истины, поскольку она влияет на организм, увеличивая количество метаболитов у носителя.',
     props: [
         { name: 'Переносимый вес', values: ['1.5 кг.', '3 кг.', '3.6 кг.', '4.8 кг.', '6 кг.'] },
         { name: 'Электрозащита', values: ['2.5%', '5%', '6%', '8%', '10%'] },
@@ -525,16 +531,16 @@
     ]
 },
 {
-    id: 'modal20', label: 'Колючка', img: 'koluchka.jpg',
+    id: 'modal20', label: 'Колючка', img: 'images/koluchka.jpg',
 	border: 'yellow',
-    desc: 'Артефакт образуется в аномалиях кислотного типа. Состоит из аномально твёрдого материала, неизвестного науке. Толщина шипов от 0.3 мм до нескольких молекул.',
+    desc: 'Артефакт образуется в аномалиях кислотного типа. Состоит из аномально твердого материала, неизвестного науке. Толщина шипов от 0.3 мм до нескольких молекул.',
     props: [
         { name: 'Выносливость', values: ['-1.5 ед.', '??', '??', '??', '??'] },
         { name: 'Радиация', values: ['-5 ед.', '??', '??', '??', '??'] }
     ]
 },
 {
-    id: 'modal21', label: 'Корона', img: 'korona.jpg',
+    id: 'modal21', label: 'Корона', img: 'images/korona.jpg',
 	border: 'yellow',
     desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях гравитационного типа. Сходство с ювелирным украшением обеспечило короне высокую цену на черных рынках Большой земли.',
     props: [
@@ -545,7 +551,7 @@
     ]
 },
 {
-    id: 'modal22', label: 'Кристальная колючка', img: 'kristalnaya_koluchka.jpg',
+    id: 'modal22', label: 'Кристальная колючка', img: 'images/kristalnaya_koluchka.jpg',
 	border: 'yellow',
     desc: 'Артефакт образуется в аномалиях кислотного типа. Внутренняя текстура игл Колючки представляет собой бесконечный геометрический фрактал.',
     props: [
@@ -555,7 +561,7 @@
     ]
 },
 {
-    id: 'modal23', label: 'Кристал', img: 'kristal.jpg',
+    id: 'modal23', label: 'Кристал', img: 'images/kristal.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -567,21 +573,19 @@
     ]
 },
 {
-    id: 'modal24', label: 'Крысиный король', img: 'krisiniy_korol.jpg',
-	border: 'red',
-    desc: 'В данный момент нет информации об этом артефакте',
+    id: 'modal24', label: 'Крысиный король', img: 'images/krisiniy_korol.jpg',
+	border: 'yellow',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях электрического типа. Каждый из проводов в запутанном клубке генерирует электромагнитное поле, из-за чего Крысиный король непрерывно шевелится.',
     props: [
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] }
+        { name: 'Электрозащита', values: ['??', '??', '??', '??', '20%'] },
+        { name: 'Радиация', values: ['??', '??', '??', '??', '160 ед.'], neg: true },
+        { name: 'Может остановить кровотечение', values: ['??', '??', '??', '??', 'да'], pos: true }
     ]
 },
 {
-    id: 'modal25', label: 'Лира', img: 'lira.jpg',
+    id: 'modal25', label: 'Лира', img: 'images/lira.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях термического типа. Малейшие колебания заставляют струновидные образования нагреваться.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях термического типа. Малейшие колебания заставляют струновидные образования нагреваться.',
     props: [
         { name: 'Здоровье', values: ['0.4 ед.', '0.8 ед.', '0.96 ед.', '1.28 ед.', '1.6 ед.'] },
         { name: 'Переносимый вес', values: ['3.5 кг.', '7 кг.', '8.4 кг.', '11.2 кг.', '14 кг.'] },
@@ -591,7 +595,7 @@
     ]
 },
 {
-    id: 'modal26', label: 'Ловушка', img: 'lovushka.jpg',
+    id: 'modal26', label: 'Ловушка', img: 'images/lovushka.jpg',
 	border: 'green',
     desc: 'Артефакт малоизвестнный так как появился в зоне относительно недавно',
     props: [
@@ -602,7 +606,7 @@
     ]
 },
 {
-    id: 'modal27', label: 'Ломоть мяса', img: 'lomot_myasa.jpg',
+    id: 'modal27', label: 'Ломоть мяса', img: 'images/lomot_myasa.jpg',
 	border: 'green',
     desc: 'Артефакт образуется в аномалиях кислотного типа. Жидкость, сочащаяся из Ломтя мяса, напоминает по химическому составу животный жир. Употреблять в пищу не рекомендуется.',
     props: [
@@ -612,7 +616,7 @@
     ]
 },
 {
-    id: 'modal28', label: 'Магма', img: 'magma.jpg',
+    id: 'modal28', label: 'Магма', img: 'images/magma.jpg',
 	border: 'green',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -625,9 +629,9 @@
     ]
 },
 {
-    id: 'modal29', label: 'Мамины бусы', img: 'mamini_busi.jpg',
+    id: 'modal29', label: 'Мамины бусы', img: 'images/mamini_busi.jpg',
 	border: 'green',
-    desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях термического типа. Ценится на чёрных рынках Большой земли в качестве эксклюзивного украшения для интерьера...',
+    desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях термического типа. Ценится на черных рынках Большой земли в качестве эксклюзивного украшения для интерьера...',
     props: [
         { name: 'Кровь', values: ['8 ед.', '16 ед.', '19.2 ед.', '25.6 ед.', '32 ед.'] },
         { name: 'Радиация', values: ['50 ед.', '100 ед.', '120 ед.', '160 ед.', '200 ед.'] , neg: true },
@@ -635,7 +639,7 @@
     ]
 },
 {
-    id: 'modal30', label: 'Механическое сердце', img: 'mehanicheskoe_serdce.jpg',
+    id: 'modal30', label: 'Механическое сердце', img: 'images/mehanicheskoe_serdce.jpg',
 	border: 'green',
     desc: 'Куски плоти которые притянули и сжали в себя разные болты и гайки что внешне стало похоже на сердце. Пользуется популярностью на большой земле',
     props: [
@@ -646,7 +650,7 @@
     ]
 },
 {
-    id: 'modal31', label: 'Мухоловка', img: 'muholovka.jpg',
+    id: 'modal31', label: 'Мухоловка', img: 'images/muholovka.jpg',
 	border: 'yellow',
     desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях гравитационного типа. При контакте жгутиков с незащищенной кожей возникают ожоги. Соблюдайте технику безопасности!',
     props: [
@@ -657,7 +661,7 @@
     ]
 },
 {
-    id: 'modal32', label: 'Мертвая губка', img: 'mertvaya_gubka.jpg',
+    id: 'modal32', label: 'Мертвая губка', img: 'images/mertvaya_gubka.jpg',
 	border: 'green',
     desc: 'Артефакт втречается в Зоне нечасто. Образуется в аномалиях термического типа. Порошок из Мертвой губки пользовался спросом среди поклоников нетрадиционной медецины на Великой земле.',
     props: [
@@ -668,7 +672,7 @@
     ]
 },
 {
-    id: 'modal33', label: 'Оболочка', img: 'obolochka.jpg',
+    id: 'modal33', label: 'Оболочка', img: 'images/obolochka.jpg',
 	border: 'yellow',
     desc: 'При ношении этого артефакта денатурация белков происходит медленнее. Другими словами, плоть способна выдерживать более высокие температуры и меньше обгорает. Сам по себе он является дорогой и редкой вещью.',
     props: [
@@ -679,9 +683,9 @@
     ]
 },
 {
-    id: 'modal34', label: 'Огненный шар', img: 'ogneniy_shar.jpg',
+    id: 'modal34', label: 'Огненный шар', img: 'images/ogneniy_shar.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях термического типа. На ощупь Огненный шар неожиданно холодный. Разница температур между его мембраной и ядром состовляет 500 градусов по Цельсию.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях термического типа. На ощупь Огненный шар неожиданно холодный. Разница температур между его мембраной и ядром состовляет 500 градусов по Цельсию.',
     props: [
         { name: 'Здоровье', values: ['0.4ед.', '0.8ед.', '0.96ед.', '1.28ед.', '1.6ед.'] },
         { name: 'Термозащита', values: ['2.5%', '5%', '6%', '8%', '10%'] },
@@ -690,7 +694,7 @@
     ]
 },
 {
-    id: 'modal35', label: 'Осьминог', img: 'osminog.jpg',
+    id: 'modal35', label: 'Осьминог', img: 'images/osminog.jpg',
 	border: 'yellow',
     desc: 'Необычный артефакт у которого торчат тентакли в разные стороны. Мерзкая штука.',
     props: [
@@ -701,7 +705,7 @@
     ]
 },
 {
-    id: 'modal36', label: 'Плавники', img: 'plavniki.jpg',
+    id: 'modal36', label: 'Плавники', img: 'images/plavniki.jpg',
 	border: 'green',
     desc: 'Внешне напоминает два поавеика слипившихся вместе. Часто меняет цвет, пользуется популярностью у сталкеров из-за необычного вида.',
     props: [
@@ -712,7 +716,7 @@
     ]
 },
 {
-    id: 'modal37', label: 'Плазма', img: 'plazma.jpg',
+    id: 'modal37', label: 'Плазма', img: 'images/plazma.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -724,7 +728,7 @@
     ]
 },
 {
-    id: 'modal38', label: 'Плесень', img: 'plesen.jpg',
+    id: 'modal38', label: 'Плесень', img: 'images/plesen.jpg',
 	border: 'green',
     desc: 'Артефакт образуется в аномалиях кислотного типа. Ускоряет размножение грибков и микробов. Не рекомендуется хранить вместе с продуктами питания, включая консервацию.',
     props: [
@@ -735,7 +739,7 @@
     ]
 },
 {
-    id: 'modal39', label: 'Подушка', img: 'podushka.jpg',
+    id: 'modal39', label: 'Подушка', img: 'images/podushka.jpg',
 	border: 'green',
     desc: 'Увеличивает защиту от рукопашного урона, но снижает защиту от пулевого урона. Уменьшает урон от падения с большой высоты. Дополнительные свойства присущие артефакту еще не изучены.',
     props: [
@@ -746,7 +750,7 @@
     ]
 },
 {
-    id: 'modal40', label: 'Полость', img: 'polost.jpg',
+    id: 'modal40', label: 'Полость', img: 'images/polost.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -758,19 +762,17 @@
     ]
 },
 {
-    id: 'modal41', label: 'Пружина', img: 'pruzina.jpg',
-	border: 'red',
-    desc: 'В данный момент нет информации об этом артефакте',
+    id: 'modal41', label: 'Пружина', img: 'images/pruzina.jpg',
+	border: 'yellow',
+    desc: 'Артефакт встречается в зоне не часто. Образуется в аномалиях гравитационного типа. Пружина не перестает сжиматся и разжиматся даже под грузом свыше 3000 тонн.',
     props: [
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] }
+        { name: 'Переносимый вес', values: ['??', '15 кг.', '??', '??', '??'] },
+        { name: 'Гравизащита', values: ['??', '-5%', '??', '??', '??'], neg: true },
+        { name: 'Радиация', values: ['??', '60 ед.', '??', '??', '??'], neg: true }
     ]
 },
 {
-    id: 'modal42', label: 'Рог', img: 'rog.jpg',
+    id: 'modal42', label: 'Рог', img: 'images/rog.jpg',
 	border: 'green',
     desc: 'Артефакт образуется в аномалиях кислотного типа. Умельцы Большой земли вырезают из этого артефакта инструмент, похожий на охотничий рог. Звуки Рога напоминают вой осеннего ветра.',
     props: [
@@ -780,7 +782,7 @@
     ]
 },
 {
-    id: 'modal43', label: 'Рубин', img: 'rubin.jpg',
+    id: 'modal43', label: 'Рубин', img: 'images/rubin.jpg',
 	border: 'green',
     desc: 'Внешне напоминает драгоценный камень который пульсирует разными цветами. Имеет большую ценность за просторами зоны.',
     props: [
@@ -794,9 +796,9 @@
     ]
 },
 {
-    id: 'modal44', label: 'Сапфир', img: 'sapfir.jpg',
+    id: 'modal44', label: 'Сапфир', img: 'images/sapfir.jpg',
 	border: 'green',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях электрического типа. Сталкеры верят, что если подкинуть Сапфир тайком в чужую снарягу, его новому владельцу передадутся беды старого.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях электрического типа. Сталкеры верят, что если подкинуть Сапфир тайком в чужую снарягу, его новому владельцу передадутся беды старого.',
     props: [
         { name: 'Кровь', values: ['-8 ед.', '-16 ед.', '-19.2 ед.', '-25.6 ед.', '-32 ед.'] , neg: true },
         { name: 'Шок', values: ['10 ед.', '20 ед.', '24 ед.', '32 ед.', '40 ед.'] },
@@ -805,7 +807,7 @@
     ]
 },
 {
-    id: 'modal45', label: 'Скорлупа', img: 'skorlupa.jpg',
+    id: 'modal45', label: 'Скорлупа', img: 'images/skorlupa.jpg',
 	border: 'green',
     desc: 'Артефакт образуется в аномалиях кислотного типа. Несмотря на неприглядный вид. Скорлупа, разлагающая большинство органических загрязнителей, используется для отчистки сточных вод.',
     props: [
@@ -814,7 +816,7 @@
     ]
 },
 {
-    id: 'modal46', label: 'Слизь', img: 'sliz.jpg',
+    id: 'modal46', label: 'Слизь', img: 'images/sliz.jpg',
 	border: 'yellow',
     desc: 'Артефакт образуется в аномалиях кислотного типа. При воздейсвии экстримально контрастным температурам Слизь плавится и застывает в форме спирали.',
     props: [
@@ -825,7 +827,7 @@
     ]
 },
 {
-    id: 'modal47', label: 'Сломанный камень', img: 'slomaniy_kamen.jpg',
+    id: 'modal47', label: 'Сломанный камень', img: 'images/slomaniy_kamen.jpg',
 	border: 'yellow',
     desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях гравитационного типа. В отсутсвии наблюдателя показатели артефакта парестают фиксироватся приборами...',
     props: [
@@ -836,9 +838,9 @@
     ]
 },
 {
-    id: 'modal48', label: 'Слюда', img: 'sluda.jpg',
+    id: 'modal48', label: 'Слюда', img: 'images/sluda.jpg',
 	border: 'yellow',
-    desc: 'Артефакт образуется в аномалиях кислотного типа. При рассмотрении под ультрафиолетом или в инфрокрасном спектре Слюда теряет свою прозрачность, становясь непроницаемо чёрной.',
+    desc: 'Артефакт образуется в аномалиях кислотного типа. При рассмотрении под ультрафиолетом или в инфрокрасном спектре Слюда теряет свою прозрачность, становясь непроницаемо черной.',
     props: [
         { name: 'Электрозащита', values: ['2.5%', '5%', '??', '8%', '??'] },
         { name: 'Гравизащита', values: ['2.5%', '5%', '??', '8%', '??'] },
@@ -849,7 +851,7 @@
     ]
 },
 {
-    id: 'modal49', label: 'Узел', img: 'uzel.jpg',
+    id: 'modal49', label: 'Узел', img: 'images/uzel.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -861,9 +863,9 @@
     ]
 },
 {
-    id: 'modal50', label: 'Шоколадка', img: 'shokoladka.jpg',
+    id: 'modal50', label: 'Шоколадка', img: 'images/shokoladka.jpg',
 	border: 'yellow',
-    desc: 'Артефакт широко распространён. Образуется в аномалиях электрического типа. Попытка разделить пластины приводит к их схлопыванию в начальную форму на скорости свыше 213 м/с.',
+    desc: 'Артефакт широко распространен. Образуется в аномалиях электрического типа. Попытка разделить пластины приводит к их схлопыванию в начальную форму на скорости свыше 213 м/с.',
     props: [
         { name: 'Электрозащита', values: ['2.5%', '5%', '6%', '8%', '10%'] },
         { name: 'Радиация', values: ['35 ед.', '70 ед.', '84 ед.', '112 ед.', '140 ед.'] , neg: true },
@@ -871,7 +873,7 @@
     ]
 },
 {
-    id: 'modal51', label: 'Арфа', img: 'arfa.jpg',
+    id: 'modal51', label: 'Арфа', img: 'images/arfa.jpg',
 	border: 'green',
     desc: 'Артефакт встречается в Зоне нечасто. Образуется в аномалиях электрического типа. Сталкеры верят: если вглядываться в кристаллы этого артефакта, можно услышать странные мелодии.',
     props: [
@@ -882,7 +884,7 @@
     ]
 },
 {
-    id: 'modal52', label: 'Урок труда', img: 'urok_truda.jpg',
+    id: 'modal52', label: 'Урок труда', img: 'images/urok_truda.jpg',
 	border: 'yellow',
     desc: 'Артефакт встречается нечасто. Образуется в аномалиях электрического типа. При откалывании болтав от сердцевины артефакта ему требуется около недели, чтобы нарасить их обратно.',
     props: [
@@ -894,7 +896,7 @@
     ]
 },
 {
-    id: 'modal53', label: 'Амёба', img: 'ameba.jpg',
+    id: 'modal53', label: 'Амеба', img: 'images/ameba.jpg',
 	border: 'yellow',
     desc: 'Природа этой медузоподобной гадости не исследованна. При контакте наносит повреждения схожи с действием сильной кислоты.',
     props: [
@@ -903,11 +905,11 @@
         { name: 'Термозащита', values: ['2.5%', '??', '??', '??', '??'] },
         { name: 'Термозащита', values: ['2.5%', '??', '??', '??', '??'] },
 		{ name: 'Химзащита', values: ['2.5%', '??', '??', '??', '??'] },
-        { name: 'Радиация', values: ['25 ед.', '??', '??', '??', '??'] , neg: true }
+        { name: 'Радиация', values: ['25 ед.', '??', '??', '??', '??'], neg: true }
     ]
 },
 {
-    id: 'modal54', label: 'Бутон', img: 'buton.jpg',
+    id: 'modal54', label: 'Бутон', img: 'images/buton.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -919,7 +921,7 @@
     ]
 },
 {
-    id: 'modal55', label: 'Гипер-куб', img: 'giper_kub.jpg',
+    id: 'modal55', label: 'Гипер-куб', img: 'images/giper_kub.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -931,7 +933,7 @@
     ]
 },
 {
-    id: 'modal56', label: 'Гребень', img: 'greben.jpg',
+    id: 'modal56', label: 'Гребень', img: 'images/greben.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -943,7 +945,21 @@
     ]
 },
 {
-    id: 'modal57', label: 'Грозовая ягода', img: 'grozovaya_yagoda.jpg',
+    id: 'modal57', label: 'Грозовая ягода', img: 'images/grozovaya_yagoda.jpg',
+	border: 'yellow',
+    desc: 'Артефакт-легенда. Образуется в аномалиях электрического типа. При постепенном нагревнии до 78 градусов по Цельсию провоцирует яркие коллективные голлюцинации утопического характера.',
+    props: [
+        { name: 'Шок', values: ['??', '??', '??', '16 ед.', '??'] },
+        { name: 'Выносливость', values: ['??', '??', '??', '19.2 ед.', '??'] },
+        { name: 'Электрозащита', values: ['??', '??', '??', '-8%', '??'], neg: true },
+        { name: 'Гравизащита', values: ['??', '??', '??', '-8%', '??'], neg: true },
+		{ name: 'Термозащита', values: ['??', '??', '??', '-8%', '??'], neg: true },
+		{ name: 'Химзащита', values: ['??', '??', '??', '-8%', '??'], neg: true },
+        { name: 'Радиация', values: ['??', '??', '??', '224 ед.', '??'], neg: true }
+    ]
+},
+{
+    id: 'modal58', label: 'Железная колючка', img: 'images/zeleznaya_koluchka.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -955,19 +971,7 @@
     ]
 },
 {
-    id: 'modal58', label: 'Железная колючка', img: 'zeleznaya_koluchka.jpg',
-	border: 'red',
-    desc: 'В данный момент нет информации об этом артефакте',
-    props: [
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] },
-        { name: '???', values: ['??', '??', '??', '??', '??'] }
-    ]
-},
-{
-    id: 'modal59', label: 'Кубик-Рубик', img: 'kubik_rubik.jpg',
+    id: 'modal59', label: 'Кубик-Рубик', img: 'images/kubik_rubik.jpg',
 	border: 'yellow',
     desc: 'Редкий артефакт. Образуется в аномалиях гравитационного типа. В инфрокрасном спектре становится прозрачным.',
     props: [
@@ -977,7 +981,7 @@
     ]
 },
 {
-    id: 'modal60', label: 'Лепесток', img: 'lepestok.jpg',
+    id: 'modal60', label: 'Лепесток', img: 'images/lepestok.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -989,7 +993,7 @@
     ]
 },
 {
-    id: 'modal61', label: 'Магический шар', img: 'magicheskiy_shar.jpg',
+    id: 'modal61', label: 'Магический шар', img: 'images/magicheskiy_shar.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1001,7 +1005,7 @@
     ]
 },
 {
-    id: 'modal62', label: 'Морская звезда', img: 'morskaya_zvezda.jpg',
+    id: 'modal62', label: 'Морская звезда', img: 'images/morskaya_zvezda.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1013,7 +1017,7 @@
     ]
 },
 {
-    id: 'modal63', label: 'Мясная зажигалка', img: 'myasnaya_zazigalka.jpg',
+    id: 'modal63', label: 'Мясная зажигалка', img: 'images/myasnaya_zazigalka.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1025,7 +1029,7 @@
     ]
 },
 {
-    id: 'modal64', label: 'Пленка', img: 'plenka.jpg',
+    id: 'modal64', label: 'Пленка', img: 'images/plenka.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1037,7 +1041,7 @@
     ]
 },
 {
-    id: 'modal65', label: 'Попрыгунчик', img: 'poprigunchik.jpg',
+    id: 'modal65', label: 'Попрыгунчик', img: 'images/poprigunchik.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1049,7 +1053,7 @@
     ]
 },
 {
-    id: 'modal66', label: 'Факел', img: 'fakel.jpg',
+    id: 'modal66', label: 'Факел', img: 'images/fakel.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1061,7 +1065,7 @@
     ]
 },
 {
-    id: 'modal67', label: 'Ядро', img: 'yadro.jpg',
+    id: 'modal67', label: 'Ядро', img: 'images/yadro.jpg',
 	border: 'red',
     desc: 'В данный момент нет информации об этом артефакте',
     props: [
@@ -1073,7 +1077,7 @@
     ]
 },
 {
-    id: 'modal68', label: 'Пустышка', img: 'pustishka.jpg',
+    id: 'modal68', label: 'Пустышка', img: 'images/pustishka.jpg',
 	border: 'yellow',
     desc: 'Артефакт широко распространен. Образуется в аномалиях электрического типа. Травмоопасен даже в лабораторных условиях. Совать пальцы между дисками котегорически не рекомендуется!',
     props: [
@@ -1082,10 +1086,9 @@
         { name: 'Радиация', values: ['25 ед.', '50 ед.', '60 ед.', '80 ед.', '100 ед.'] }
     ]
 },
-
         
 {
-    id: 'modal69', label: 'Рыба', img: 'riba.jpg',
+    id: 'modal69', label: 'Рыба', img: 'images/riba.jpg',
 	border: 'yellow',
     desc: 'Артефакт образуется в местах взаимодействия множества гравитационных полей. Генерирует вокруг себя сферу направленного гравитационного поля.',
     props: [
@@ -1096,7 +1099,7 @@
     ]
         },
         {
-            id: 'modal70', label: 'Пусто', img: 'nope.jpg',
+            id: 'modal70', label: 'Пусто', img: 'images/nope.jpg',
             
         },
     ];
@@ -1105,12 +1108,10 @@
 	function isPusto(artifact) {
         return artifact.label === 'Пусто';
     }
-
    
     ARTIFACTS_DATA.sort((a, b) => {
         const aIsPusto = isPusto(a);
         const bIsPusto = isPusto(b);
-
         if (aIsPusto && !bIsPusto) {
             return 1;
         }
@@ -1120,50 +1121,65 @@
         
         return a.label.localeCompare(b.label, 'ru', { sensitivity: 'base' });
     });
-
     const ICON_PER_ROW = 10;
     const VALUE_CLASSES = ['value-gray', 'value-white', 'value-green', 'value-blue', 'value-orange'];
     let zIndexCounter = 10; 
-
     function generateIconList() {
     const container = document.getElementById('icon-list-container');
+   function renderArtifacts(artifactsToDisplay) {
+    const iconListContainer = document.getElementById('icon-list-container');
+    iconListContainer.innerHTML = ''; 
+    if (artifactsToDisplay.length === 0) {
+        iconListContainer.innerHTML = '<p style="color: #ff4747; margin-left: 20px;">Артефакты не найдены.</p>';
+        return;
+    }
     let currentRow = document.createElement('div');
     currentRow.className = 'icon-row';
-    
-    ARTIFACTS_DATA.forEach((artifact, index) => {
-        if (index > 0 && index % ICON_PER_ROW === 0) {
-            container.appendChild(currentRow);
+    iconListContainer.appendChild(currentRow);
+    let count = 0;
+    artifactsToDisplay.forEach(artifact => {
+        if (count >= ICON_PER_ROW) {
             currentRow = document.createElement('div');
             currentRow.className = 'icon-row';
+            iconListContainer.appendChild(currentRow);
+            count = 0;
+        }
+        const iconWrapper = document.createElement('div');
+        iconWrapper.className = 'icon-wrapper';
+       
+        if (isPusto(artifact)) {
+           
+            iconWrapper.innerHTML = `<span class="icon-label value-gray">Пусто</span><img src="${artifact.img}" alt="${artifact.label}" class="custom-icon" style="opacity: 0.5; border-color: #333 !important; cursor: default;">`;
+        } else {
+            
+            iconWrapper.innerHTML = `
+                <span class="icon-label">${artifact.label}</span>
+                <img src="${artifact.img}" alt="${artifact.label}" class="custom-icon border-${artifact.border}" onclick="openModal('${artifact.id}', event)">
+            `;
         }
         
-        const wrapper = document.createElement('div');
-        wrapper.className = 'icon-wrapper';
-        
-      
-        let borderClass = '';
- 
-        if (artifact.border) {
-            borderClass = 'border-' + artifact.border; 
-        }
-     
-        
-        wrapper.innerHTML = `
-            <span class="icon-label">${artifact.label}</span>
-            <img src="images/${artifact.img}" 
-                 alt="${artifact.label}" 
-                 class="custom-icon ${borderClass}" 
-                 onclick="openModal('${artifact.id}', event)" 
-                 onerror="this.onerror=null;this.src='images/placeholder.jpg';">
-        `;
-        currentRow.appendChild(wrapper);
+        currentRow.appendChild(iconWrapper);
+        count++;
     });
-    
-    if (currentRow.children.length > 0) {
-        container.appendChild(currentRow);
-    }
 }
-
+const searchInput = document.getElementById('artifact-search');
+searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+   
+    const filteredArtifacts = ARTIFACTS_DATA.filter(artifact => {
+        
+        if (isPusto(artifact)) return false; 
+        
+        
+        return artifact.label.toLowerCase().includes(searchTerm);
+    });
+    renderArtifacts(filteredArtifacts);
+});
+	renderArtifacts(ARTIFACTS_DATA);
+		if (currentRow.children.length > 0) {
+        container.appendChild(currentRow);
+		}
+	}
     function getModalContentHTML(artifactData, uniqueModalId) {
         const propertiesHtml = artifactData.props.map(prop => {
             const valuesHtml = prop.values.map((val, i) =>
@@ -1181,7 +1197,6 @@
 					</div>
             `;
         }).join('');
-
         return `
             <div id="modal-content-wrapper-${artifactData.id}" class="modal-content">
                 <div class="pin-button" onclick="togglePin('${uniqueModalId}')">&#128204;</div>
@@ -1194,7 +1209,6 @@
             </div>
         `;
     }
-
     function closeAllModals() {
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
@@ -1203,15 +1217,11 @@
             }
         });
     }
-
     function openModal(id, event) {
         event.stopPropagation();
-
         closeAllModals(); 
-
         const artifact = ARTIFACTS_DATA.find(a => a.id === id);
         if (!artifact) return;
-
         const uniqueModalId = `modal-${id}-${Date.now()}`;
         
         const modalEl = document.createElement('div');
@@ -1229,13 +1239,10 @@
         const modalWidth = 450;
         const MODAL_HEIGHT_ESTIMATE = 400;
         const OFFSET = 15; 
-
         let top, left;
-
         let centerIconX = iconRect.left + (iconRect.width / 2);
         left = centerIconX - (modalWidth / 2);
         left = Math.min(Math.max(OFFSET, left), viewportWidth - modalWidth - OFFSET);
-
         const spaceBelow = viewportHeight - iconRect.bottom;
         
         if (spaceBelow >= MODAL_HEIGHT_ESTIMATE + OFFSET) {
@@ -1257,46 +1264,37 @@
         modalEl.style.zIndex = zIndexCounter;
         setupDrag(modalEl); 
     }
-
     function closeModal(uniqueModalId) {
         const modalEl = document.getElementById(uniqueModalId);
         if (modalEl) {
             modalEl.remove();
         }
     }
-
     function togglePin(uniqueModalId) {
         const modal = document.getElementById(uniqueModalId);
         if (modal) {
             modal.classList.toggle('pinned');
             setupDrag(modal);
-
             if (modal.classList.contains('pinned')) {
                 zIndexCounter++;
                 modal.style.zIndex = zIndexCounter;
             }
         }
     }
-
     function setupDrag(modalEl) {
         let pos3 = 0, pos4 = 0;
         let isDragging = false;
         const modalContent = modalEl.querySelector('.modal-content');
-
         modalContent.style.cursor = 'grab';
-
         modalEl.onmousedown = dragMouseDown;
         modalEl.ontouchstart = dragTouchStart;
-
         const closeButton = modalEl.querySelector('.close');
         const pinButton = modalEl.querySelector('.pin-button');
         if (closeButton) { closeButton.ontouchstart = (e) => e.stopPropagation(); }
         if (pinButton) { pinButton.ontouchstart = (e) => e.stopPropagation(); }
-
         function dragMouseDown(e) {
             e = e || window.event;
             e.preventDefault();
-
             if (e.target.closest('.close') || e.target.closest('.pin-button') || e.target.closest('.artifact-property')) return;
             
             pos3 = e.clientX;
@@ -1309,7 +1307,6 @@
             zIndexCounter++;
             modalEl.style.zIndex = zIndexCounter;
         }
-
         function elementDrag(e) {
             e = e || window.event;
             e.preventDefault();
@@ -1317,7 +1314,6 @@
             if (Math.abs(pos3 - e.clientX) > 5 || Math.abs(pos4 - e.clientY) > 5) {
                 isDragging = true;
             }
-
             const pos1 = pos3 - e.clientX;
             const pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
@@ -1325,23 +1321,18 @@
             
             let newTop = modalEl.offsetTop - pos2;
             let newLeft = modalEl.offsetLeft - pos1;
-
             newTop = Math.max(0, newTop); 
             newLeft = Math.max(0, newLeft); 
             newLeft = Math.min(newLeft, window.innerWidth - modalEl.offsetWidth);
-
             modalEl.style.top = newTop + "px";
             modalEl.style.left = newLeft + "px";
         }
-
         function closeDragElement() {
             document.onmouseup = null;
             document.onmousemove = null;
         }
-
         function dragTouchStart(e) {
             if (e.target.closest('.close') || e.target.closest('.pin-button') || e.target.closest('.artifact-property')) return;
-
             if (e.touches.length === 1) {
                 e.preventDefault();
                 const touch = e.touches[0];
@@ -1366,7 +1357,6 @@
                 if (Math.abs(pos3 - touch.clientX) > 5 || Math.abs(pos4 - touch.clientY) > 5) {
                     isDragging = true;
                 }
-
                 const pos1 = pos3 - touch.clientX;
                 const pos2 = pos4 - touch.clientY;
                 pos3 = touch.clientX;
@@ -1375,7 +1365,6 @@
                
                 let newTop = modalEl.offsetTop - pos2;
                 let newLeft = modalEl.offsetLeft - pos1;
-
                 
                 newTop = Math.max(0, newTop); 
                 newLeft = Math.max(0, newLeft);
@@ -1391,9 +1380,7 @@
             document.ontouchmove = null;
         }
     }
-
     document.addEventListener('DOMContentLoaded', generateIconList);
     </script>
 </body>
-
 </html>
