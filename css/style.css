@@ -1,0 +1,367 @@
+
+html {
+  font-size: 14px;
+}
+
+.modal-content {
+  font-size: 1rem;
+}
+.property-name,
+.property-values {
+  font-size: 0.93rem;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 20px;
+  background-color: #121212;
+  color: #e0e0e0;
+  position: relative;
+}
+
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #fff;
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+/* =========================
+   ПОИСК
+========================= */
+
+.search-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 450px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.search-main-row {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  background: #111;
+  border: 1px solid #333;
+  color: #ddd;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+.search-main-row .search-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-input::placeholder {
+  color: #777;
+}
+
+.search-input:focus {
+  border-color: #ff9900;
+  box-shadow: 0 0 0 1px rgba(255,153,0,0.3);
+}
+
+.filter-toggle {
+  background: #111;
+  border: 1px solid #333;
+  color: #aaa;
+  border-radius: 6px;
+  flex-shrink: 0;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.filter-toggle:hover {
+  color: #5aff5a;
+  border-color: #5aff5a;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =========================
+   СЕТКА АРТЕФАКТОВ
+========================= */
+
+#icon-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 90px);
+  gap: 16px;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90px;
+}
+
+.icon-label {
+  height: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.custom-icon {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #222;
+  padding: 5px;
+  border: 1px solid #444;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.custom-icon:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 8px rgba(255,255,255,0.2);
+}
+
+/* =========================
+   ЦВЕТА РАМОК
+========================= */
+
+.border-red { border: 2px solid #ff4747 !important; }
+.border-green { border: 2px solid #00d000 !important; }
+.border-yellow { border: 2px solid #ffff00 !important; }
+
+/* =========================
+   МОДАЛЬНОЕ ОКНО
+========================= */
+
+.modal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  width: 420px;
+  background: transparent;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  padding: 34px 14px 14px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.55);
+  font-size: 1rem;
+  cursor: grab;
+}
+
+.modal.pinned .modal-content {
+  cursor: grab;
+}
+
+.pin-button {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 22px;
+  height: 22px;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modal.pinned .pin-button {
+  background: #ff9900;
+  color: #1a1a1a;
+  border-color: #ff9900;
+}
+
+.close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 22px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ff4747;
+}
+
+/* =========================
+   КОНТЕНТ МОДАЛКИ
+========================= */
+
+.artifact-title {
+  color: #b0b0b0;
+  font-size: 1.05rem;
+}
+
+.artifact-name {
+  color: #ff9900;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.modal-switch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.prop-toggle {
+  background: #111;
+  border: 1px solid #333;
+  color: #aaa;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.prop-toggle.active {
+  background: #ff9900;
+  color: #1a1a1a;
+  border-color: #ff9900;
+  font-weight: bold;
+}
+
+.artifact-property {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.property-name {
+  font-size: 0.93rem;
+  white-space: nowrap;
+}
+
+.property-values {
+  display: grid;
+  grid-template-columns: repeat(5, 52px);
+  gap: 4px;
+  font-size: 0.9rem;
+  justify-content: end;
+}
+
+.property-values span {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.artifact-property:not(:last-child) {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 3px;
+}
+
+.divider {
+  border-top: 1px solid #444;
+  margin: 8px 0;
+}
+
+.value-gray { color: #a0a0a0; }
+.value-white { color: #ffffff; }
+.value-green { color: #7CFC00; }
+.value-blue { color: #00bfff; }
+.value-orange { color: #ff9900; }
+
+.negative-effect { color: #ff4747; }
+.positive-effect { color: #ffff00; }
+
+/* =========================
+   ОСНОВНАЯ РАЗМЕТКА
+========================= */
+
+.main-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.icon-list-wrapper {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* =========================
+   ПАНЕЛЬ ИНФОРМАЦИИ
+========================= */
+
+.site-info-panel {
+  width: 560px;
+  padding: 14px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.site-info-panel h2 {
+  color: #ff9900;
+  margin-top: 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 6px;
+}
+
+.site-info-panel p {
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+.artifact-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.artifact-name {
+  color: #ff9900;
+  font-weight: bold;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+.modal-switch {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.artifact-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ccc;
+  margin: 6px 0 8px;
+}
+
+
+/* =========================
+   АДАПТИВ
+========================= */
+
+@media (max-width: 480px) {
+  .artifact-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
